@@ -2,8 +2,9 @@ import { readFileSync } from "fs";
 import { connect } from "mongoose";
 import colors from "colors";
 import { config } from "dotenv";
-import { create, deleteMany } from "./models/Category.js";
-import { create as _create, deleteMany as _deleteMany } from "./models/User.js";
+// import { create, deleteMany } from "./models/Category.js";
+// import { create as _create, deleteMany as _deleteMany } from "./models/User.js";
+import { create, deleteMany } from "./models/Product.js";
 
 config({ path: "./config/config.env" });
 
@@ -14,16 +15,20 @@ connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
-const categories = JSON.parse(
-  readFileSync(__dirname + "/data/categories.json", "utf-8")
-);
+// const categories = JSON.parse(
+//   readFileSync(__dirname + "/data/categories.json", "utf-8")
+// );
 
-const users = JSON.parse(readFileSync(__dirname + "/data/user.json", "utf-8"));
+// const users = JSON.parse(readFileSync(__dirname + "/data/user.json", "utf-8"));
+const products = JSON.parse(
+  readFileSync(__dirname + "/data/product.json", "utf-8")
+);
 
 const importData = async () => {
   try {
-    await create(categories);
-    await _create(users);
+    // await create(categories);
+    // await _create(users);
+    await create(products);
     console.log("Өгөгдлийг импортлолоо....".green.inverse);
   } catch (err) {
     console.log(err);
@@ -32,8 +37,8 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
+    // await deleteMany();
     await deleteMany();
-    await _deleteMany();
     console.log("Өгөгдлийг бүгдийг устгалаа....".red.inverse);
   } catch (err) {
     console.log(err.red.inverse);

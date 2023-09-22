@@ -31,17 +31,19 @@ const ProductSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
-    players: {
-      name: {
-        type: String,
+    players: [
+      {
+        name: {
+          type: String,
+        },
+        avatar: {
+          type: String,
+        },
+        price: {
+          type: Number,
+        },
       },
-      avatar: {
-        type: String,
-      },
-      price: {
-        type: String,
-      },
-    },
+    ],
 
     createUser: {
       type: mongoose.Schema.ObjectId,
